@@ -154,6 +154,7 @@ var ajax = function ajax(url, fn) {
 var main = document.querySelector('.main');
 
 html.onclick = function () {
+  console.log('发起请求Html数据');
   var xhr = new XMLHttpRequest();
   xhr.open('get', 'http://127.0.0.1:8888/index.html');
 
@@ -166,6 +167,104 @@ html.onclick = function () {
 
   xhr.send();
 };
+
+css.onclick = function () {
+  console.log("\u8BF7\u6C42Css\u6570\u636E");
+  var xhr = new XMLHttpRequest();
+  xhr.open('get', 'http://127.0.0.1:8888/css');
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      console.log(xhr.responseText);
+    }
+  };
+
+  xhr.send();
+};
+
+xml.onclick = function () {
+  console.log('xml');
+  var xhr = new XMLHttpRequest();
+  xhr.open('get', 'http://127.0.0.1:8888/xml');
+
+  xhr.onreadystatechange = function () {
+    console.log('请求');
+
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      console.log(xhr.responseXML);
+      var res = xhr.responseXML;
+      var div = res.getElementsByTagName('bookstore')[0].textContent;
+      console.log(div.trim());
+      main.innerHTML = div.trim();
+    }
+  };
+
+  xhr.send();
+};
+
+json.onclick = function () {
+  console.log('json');
+  var xhr = new XMLHttpRequest(); //0
+
+  xhr.open('get', 'http://127.0.0.1:8888/json');
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      console.log(xhr.responseText);
+    }
+  };
+
+  xhr.send(); //最重要的一步
+};
+
+var i = 1;
+
+getpage.onclick = function () {
+  i = i + 1;
+
+  if (i === 4) {
+    i = 2;
+  }
+
+  console.log('下一页');
+  var xhr = new XMLHttpRequest();
+  xhr.open('get', "http://127.0.0.1:8888/page".concat(i));
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      console.log(xhr.responseText);
+      var array = JSON.parse(xhr.responseText);
+      array.forEach(function (e) {
+        var li = document.createElement('li');
+        li.innerHTML = e.id;
+        page.appendChild(li);
+      });
+    }
+  };
+
+  xhr.send();
+}; //客户端将函数定义好
+//服务端执行这个函数
+
+
+var random = Math.random(); //使用随机数优化
+
+window[random] = function (data) {
+  console.log(data);
+};
+
+window.show = function (data) {
+  console.log(data);
+};
+
+var script = document.createElement('script');
+script.src = "http://127.0.0.1:8888/jsonp.js?functionName=".concat(random);
+
+script.onload = function () {
+  script.remove();
+};
+
+document.body.appendChild(script);
 },{}],"../../../../Users/12523/AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -194,7 +293,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50030" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61205" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
