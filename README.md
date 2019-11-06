@@ -12,3 +12,7 @@ The file will have its original line endings in your working directory
 ###### 使用hashtable实现静态服务器
 
 ###### 登录注册功能流程的梳理
+
+1. 目标
+    * 实现静态服务器
+    * 实现登录注册功能，保持登录状态，安全性能
