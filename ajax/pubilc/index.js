@@ -32,7 +32,7 @@ let main = document.querySelector('.main')
 html.onclick = () => {
     console.log('发起请求Html数据')
     let xhr = new XMLHttpRequest()
-    xhr.open('get','http://127.0.0.1:8888/index.html')
+    xhr.open('get','qq.com:8888/index.html')
     xhr.onreadystatechange = ()=>{
         if(xhr.readyState === 4  &&  xhr.status === 200){
             console.log(typeof xhr.responseText)
@@ -73,7 +73,7 @@ xml.onclick = ()=>{
 json.onclick = ()=>{
     console.log('json')
     let xhr = new XMLHttpRequest()//0
-    xhr.open('get','http://127.0.0.1:8888/json')
+    xhr.open('get','http://qq.com:8888/json')
     xhr.onreadystatechange = ()=>{
         if(xhr.readyState ===4 &&xhr.status ===200){
             console.log(xhr.responseText)
@@ -118,7 +118,7 @@ window.show = (data)=>{
     console.log(data)
 }
 let script = document.createElement('script')
-script.src = `http://127.0.0.1:8888/jsonp.js?functionName=${random}`
+script.src = `http://qq.com:8888/jsonp.js?functionName=${random}`
 script.onload = ()=>{
     script.remove()
 }
